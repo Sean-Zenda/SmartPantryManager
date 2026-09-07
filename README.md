@@ -58,7 +58,7 @@ reopened**.
 
 1. Clone the repository:
    ```
-   git clone <your-repo-url>
+   git clone https://github.com/Sean-Zenda/SmartPantryManager.git
    ```
 2. Open the project folder in **Android Studio** (Giraffe or newer).
 3. Let Gradle sync. The project requires **JDK 21** and **Android SDK Platform 37**
