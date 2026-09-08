@@ -28,6 +28,8 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
+        // Recipe icons are stored as emoji characters, so the sources must be read as UTF-8.
+        encoding = 'UTF-8'
     }
 }
 

@@ -109,6 +109,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // The suggestions screen looks ingredients up by recipe on every refresh.
         db.execSQL("CREATE INDEX idx_recipe_ing ON " + T_RECIPE_ING + "(" + RI_RECIPE_ID + ")");
+
+        // Pre-load the recipe collection so the app is useful on its very first launch.
+        RecipeSeeder.seed(db);
     }
 
     @Override
