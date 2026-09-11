@@ -1,5 +1,6 @@
 package com.seanzenda.smartpantrymanager.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.seanzenda.smartpantrymanager.AddEditIngredientActivity;
 import com.seanzenda.smartpantrymanager.R;
 import com.seanzenda.smartpantrymanager.adapter.PantryAdapter;
 import com.seanzenda.smartpantrymanager.data.DatabaseHelper;
@@ -64,6 +66,10 @@ public class PantryFragment extends Fragment {
 
         setUpSearch(view.findViewById(R.id.search_input));
         setUpChips(view);
+
+        // No extra = add mode.
+        view.findViewById(R.id.btn_add).setOnClickListener(v ->
+                startActivity(new Intent(requireContext(), AddEditIngredientActivity.class)));
     }
 
     @Override
@@ -133,7 +139,10 @@ public class PantryFragment extends Fragment {
         }
     }
 
+    /** Explicit Intent carrying the row's id, which puts the Add / Edit screen into edit mode. */
     private void onItemClicked(PantryItem item) {
-        // Opening the edit screen is wired up together with the Add / Edit activity.
+        Intent intent = new Intent(requireContext(), AddEditIngredientActivity.class);
+        intent.putExtra(AddEditIngredientActivity.EXTRA_ITEM_ID, item.getId());
+        startActivity(intent);
     }
 }

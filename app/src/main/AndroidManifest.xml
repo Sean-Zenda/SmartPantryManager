@@ -27,6 +27,13 @@
             android:name=".MainActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
+
+        <!-- Create / Update / Delete a pantry item. EXTRA_ITEM_ID selects edit mode. -->
+        <activity
+            android:name=".AddEditIngredientActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

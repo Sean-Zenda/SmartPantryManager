@@ -25,9 +25,14 @@ public final class UnitConverter {
     /** The kind of measurement a unit expresses. */
     public enum Dimension { MASS, VOLUME, COUNT, UNKNOWN }
 
-    /** Units the Add / Edit form offers, in the order they appear in the dropdown. */
-    public static final String[] SUPPORTED_UNITS = {
+    /** Units offered on the Add / Edit form when Settings is on Metric. */
+    public static final String[] METRIC_UNITS = {
             "pcs", "g", "kg", "ml", "l", "tbsp", "tsp", "cup", "cloves", "slices"
+    };
+
+    /** Units offered when Settings is on Imperial. Both lists convert to the same base units. */
+    public static final String[] IMPERIAL_UNITS = {
+            "pcs", "oz", "lb", "cup", "tbsp", "tsp", "cloves", "slices"
     };
 
     private static final Map<String, Dimension> DIMENSIONS = new HashMap<>();

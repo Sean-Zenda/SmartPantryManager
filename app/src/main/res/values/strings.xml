@@ -57,6 +57,24 @@
     <string name="err_qty_positive">Quantity must be greater than 0.</string>
     <string name="err_qty_number">Quantity must be a valid number.</string>
     <string name="err_expiry_past">Expiry date cannot be in the past.</string>
+    <string name="err_name_long">Ingredient name must be 40 characters or fewer.</string>
+    <string name="err_name_chars">Use letters only - no numbers or symbols.</string>
+    <string name="err_qty_too_big">Quantity is too large.</string>
+
+    <!-- Add / Edit extras -->
+    <string name="hint_name">e.g. Tomatoes</string>
+    <string name="icon_hint">The icon updates automatically from the ingredient name.</string>
+    <string name="unit">Unit</string>
+    <string name="back">Back</string>
+    <string name="clear_date">Clear expiry date</string>
+    <string name="cancel">Cancel</string>
+    <string name="save_failed">Could not save. Please try again.</string>
+    <string name="item_not_found">That item no longer exists.</string>
+    <string name="toast_added">%1$s added to your pantry</string>
+    <string name="toast_updated">%1$s updated</string>
+    <string name="toast_deleted">%1$s removed from your pantry</string>
+    <string name="delete_confirm_title">Delete %1$s?</string>
+    <string name="delete_confirm_body">It will be removed from your pantry, and recipes that need it will no longer be suggested.</string>
 
     <!-- Recipes -->
     <string name="suggested_recipes">Suggested Recipes</string>

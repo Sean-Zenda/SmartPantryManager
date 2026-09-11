@@ -18,7 +18,8 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:letterSpacing">0</item>
-        <item name="backgroundTint">@color/green_primary</item>
+        <item name="backgroundTint">@color/btn_primary_bg</item>
+        <item name="android:textColor">@color/white</item>
         <item name="cornerRadius">14dp</item>
         <item name="android:minHeight">54dp</item>
     </style>
@@ -51,5 +52,15 @@
         <item name="android:textSize">14sp</item>
         <item name="android:background">@drawable/bg_chip_off</item>
         <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <!-- Red validation message under a form field; hidden until there is an error -->
+    <style name="Text.Error" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:textColor">@color/status_danger</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:visibility">gone</item>
     </style>
 </resources>
