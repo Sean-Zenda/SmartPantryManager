@@ -34,4 +34,9 @@
         <item name="android:textSize">22sp</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <!-- Pale green pill behind the selected bottom navigation icon -->
+    <style name="Widget.SmartPantry.NavIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/green_pale</item>
+    </style>
 </resources>

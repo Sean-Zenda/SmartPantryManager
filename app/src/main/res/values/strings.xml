@@ -5,6 +5,7 @@
     <string name="welcome_title">Smart Pantry\nManager</string>
     <string name="welcome_tagline">Less food waste.\nMore great meals.</string>
     <string name="get_started">Get Started</string>
+    <string name="welcome_food_row">🍅🥬🧅🍋🥦</string>
 
     <!-- Pantry -->
     <string name="my_pantry">My Pantry</string>
@@ -47,6 +48,9 @@
     <string name="almost_there">Almost There — missing 1 ingredient</string>
     <string name="ingredients">Ingredients</string>
     <string name="method">Method</string>
+
+    <!-- Expiring -->
+    <string name="expiring_title">Expiring Soon</string>
 
     <!-- Settings -->
     <string name="settings">Settings</string>
