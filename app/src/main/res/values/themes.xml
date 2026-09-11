@@ -39,4 +39,17 @@
     <style name="Widget.SmartPantry.NavIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/green_pale</item>
     </style>
+
+    <!-- Category filter chip on the pantry screen; selection colours are set in code -->
+    <style name="FilterChip">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:paddingStart">18dp</item>
+        <item name="android:paddingEnd">18dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@drawable/bg_chip_off</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
 </resources>

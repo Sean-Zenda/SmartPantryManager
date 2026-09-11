@@ -17,6 +17,24 @@
     <string name="filter_other">Other</string>
     <string name="pantry_empty_title">Your pantry is empty</string>
     <string name="pantry_empty_body">Tap the + button to add the ingredients you already have at home.</string>
+    <string name="pantry_no_results_title">No items match</string>
+    <string name="pantry_no_results_body">Try a different search or category.</string>
+    <string name="emoji_basket">🧺</string>
+    <string name="quantity_unit">%1$s %2$s</string>
+
+    <!-- Expiry labels -->
+    <string name="expiry_none">No expiry date</string>
+    <string name="expiry_today">Expires today</string>
+    <string name="expiry_tomorrow">Expires tomorrow</string>
+    <string name="expiry_date">Exp: %1$s</string>
+    <plurals name="expired_days_ago">
+        <item quantity="one">Expired %d day ago</item>
+        <item quantity="other">Expired %d days ago</item>
+    </plurals>
+    <plurals name="expires_in_days">
+        <item quantity="one">Expires in %d day</item>
+        <item quantity="other">Expires in %d days</item>
+    </plurals>
 
     <!-- Add / Edit -->
     <string name="add_ingredient">Add Ingredient</string>
