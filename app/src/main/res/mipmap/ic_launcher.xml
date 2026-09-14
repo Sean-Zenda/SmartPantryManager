@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Launcher icon foreground: the welcome-screen pantry bowl, scaled into the adaptive icon safe zone -->
+<!-- Launcher icon for Android 7.x, which does not support adaptive icons -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp"
-    android:height="108dp"
+    android:width="48dp"
+    android:height="48dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+    <path android:fillColor="#E4F0E7" android:pathData="M2,54 a52,52 0 1,0 104,0 a52,52 0 1,0 -104,0" />
     <group
-        android:scaleX="0.31"
-        android:scaleY="0.31"
-        android:translateX="23"
-        android:translateY="23">
+        android:scaleX="0.34"
+        android:scaleY="0.34"
+        android:translateX="20"
+        android:translateY="20">
         <path android:fillColor="#2E7D51" android:pathData="M62,64 C46,46 52,26 70,18 C80,36 78,54 62,64 Z" />
         <path android:fillColor="#1B5E3A" android:pathData="M86,56 C82,34 94,18 112,14 C114,34 104,50 86,56 Z" />
         <path android:fillColor="#3E9A62" android:pathData="M48,76 C30,70 24,54 32,40 C48,48 54,62 48,76 Z" />
