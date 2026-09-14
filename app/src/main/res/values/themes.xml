@@ -74,4 +74,88 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <!-- Settings rows -->
+    <style name="SettingsRow" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">60dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="SettingsRow.Icon" parent="">
+        <item name="android:layout_width">22dp</item>
+        <item name="android:layout_height">22dp</item>
+        <item name="android:importantForAccessibility">no</item>
+        <item name="android:tint">@color/text_primary</item>
+    </style>
+
+    <style name="SettingsRow.Title" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="SettingsRow.Subtitle" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="SettingsRow.Chevron" parent="">
+        <item name="android:layout_width">22dp</item>
+        <item name="android:layout_height">22dp</item>
+        <item name="android:importantForAccessibility">no</item>
+        <item name="android:src">@drawable/ic_chevron</item>
+        <item name="android:tint">@color/text_muted</item>
+    </style>
+
+    <style name="SettingsDivider" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginStart">52dp</item>
+        <item name="android:background">@color/stroke_light</item>
+    </style>
+
+    <!-- Centred empty-state block used by the list tabs -->
+    <style name="EmptyState" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="EmptyState.Title" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="EmptyState.Body" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>

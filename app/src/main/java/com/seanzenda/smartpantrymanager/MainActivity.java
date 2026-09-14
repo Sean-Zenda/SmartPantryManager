@@ -4,14 +4,19 @@ import android.os.Bundle;
 
 import androidx.annotation.IdRes;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.seanzenda.smartpantrymanager.data.DatabaseHelper;
 import com.seanzenda.smartpantrymanager.ui.ExpiringFragment;
 import com.seanzenda.smartpantrymanager.ui.PantryFragment;
 import com.seanzenda.smartpantrymanager.ui.RecipesFragment;
 import com.seanzenda.smartpantrymanager.ui.SettingsFragment;
+import com.seanzenda.smartpantrymanager.util.DateUtils;
 import com.seanzenda.smartpantrymanager.util.Insets;
+import com.seanzenda.smartpantrymanager.util.Prefs;
 
 /**
  * The host activity. It owns the bottom navigation bar and swaps one Fragment in and out of
@@ -47,9 +52,36 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * onResume runs on first start and every time the user comes back from Add / Edit or Recipe
+     * Detail, which are exactly the moments the number of expiring items can have changed.
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshExpiringBadge();
+    }
+
     /** Lets a fragment switch tabs, e.g. the "Go to Pantry" button on the empty recipes screen. */
     public void selectTab(@IdRes int itemId) {
         bottomNav.setSelectedItemId(itemId);
+    }
+
+    /** Shows how many items are expiring soon on the Expiring tab, or hides the badge at zero. */
+    public void refreshExpiringBadge() {
+        int count = Prefs.isExpiryAlertsOn(this)
+                ? DatabaseHelper.getInstance(this).getExpiringCount(DateUtils.soonCutoff())
+                : 0;
+
+        if (count > 0) {
+            BadgeDrawable badge = bottomNav.getOrCreateBadge(R.id.nav_expiring);
+            badge.setNumber(count);
+            badge.setBackgroundColor(ContextCompat.getColor(this, R.color.status_warn));
+            badge.setBadgeTextColor(ContextCompat.getColor(this, R.color.white));
+            badge.setVisible(true);
+        } else {
+            bottomNav.removeBadge(R.id.nav_expiring);
+        }
     }
 
     private void showTab(@IdRes int itemId) {

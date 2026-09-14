@@ -1,13 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Expiring Soon tab -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:paddingStart="20dp"
+    android:paddingTop="16dp"
+    android:paddingEnd="20dp">
 
     <TextView
         style="@style/Text.Title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="44dp"
+        android:gravity="center_vertical"
         android:text="@string/expiring_title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/expiring_sub"
+        android:textColor="@color/text_secondary"
+        android:textSize="14sp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/expiring_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="12dp"
+            tools:listitem="@layout/item_pantry" />
+
+        <!-- nothing expiring -->
+        <LinearLayout
+            android:id="@+id/empty_state"
+            style="@style/EmptyState">
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:background="@drawable/bg_circle_pale"
+                android:gravity="center"
+                android:importantForAccessibility="no"
+                android:text="@string/emoji_party"
+                android:textSize="50sp" />
+
+            <TextView
+                style="@style/EmptyState.Title"
+                android:text="@string/expiring_empty_title" />
+
+            <TextView
+                style="@style/EmptyState.Body"
+                android:text="@string/expiring_empty_body" />
+        </LinearLayout>
+
+        <!-- alerts switched off in Settings -->
+        <LinearLayout
+            android:id="@+id/alerts_off_state"
+            style="@style/EmptyState">
+
+            <ImageView
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:background="@drawable/bg_circle_pale"
+                android:importantForAccessibility="no"
+                android:padding="32dp"
+                android:src="@drawable/ic_bell"
+                android:tint="@color/text_muted" />
+
+            <TextView
+                style="@style/EmptyState.Title"
+                android:text="@string/alerts_off_title" />
+
+            <TextView
+                style="@style/EmptyState.Body"
+                android:text="@string/alerts_off_body" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_turn_on"
+                style="@style/Widget.SmartPantry.Button.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:paddingStart="36dp"
+                android:paddingEnd="36dp"
+                android:text="@string/turn_on" />
+        </LinearLayout>
+    </FrameLayout>
 </LinearLayout>

@@ -44,6 +44,14 @@ public final class DateUtils {
         return (int) Math.round(diff / (double) TimeUnit.DAYS.toMillis(1));
     }
 
+    /** The last millisecond of the day {@link #SOON_DAYS} days from today. */
+    public static long soonCutoff() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(startOfDay(System.currentTimeMillis()));
+        calendar.add(Calendar.DAY_OF_YEAR, SOON_DAYS + 1);   // Calendar handles month ends and DST
+        return calendar.getTimeInMillis() - 1;
+    }
+
     public static boolean isExpiringSoon(PantryItem item) {
         return item.hasExpiry() && daysUntil(item.getExpiryDate()) <= SOON_DAYS;
     }

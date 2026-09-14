@@ -120,14 +120,42 @@
 
     <!-- Expiring -->
     <string name="expiring_title">Expiring Soon</string>
+    <string name="expiring_sub">Use these first so nothing goes to waste.</string>
+    <string name="expiring_empty_title">Nothing is about to expire</string>
+    <string name="expiring_empty_body">Items expiring in the next 3 days will show up here.</string>
+    <string name="alerts_off_title">Expiring soon alerts are off</string>
+    <string name="alerts_off_body">Turn them on to see which items to use first.</string>
+    <string name="turn_on">Turn On</string>
+    <string name="emoji_party">🎉</string>
 
     <!-- Settings -->
     <string name="settings">Settings</string>
     <string name="expiring_alerts">Expiring Soon Alerts</string>
-    <string name="expiring_alerts_sub">Get notified about items nearing their expiry date.</string>
+    <string name="expiring_alerts_sub">Highlight items nearing their expiry date and show a count on the Expiring tab.</string>
     <string name="units_pref">Units Preference</string>
     <string name="about_app">About App</string>
     <string name="help_support">Help &amp; Support</string>
+    <string name="version_label">Version %1$s</string>
+    <string name="units_metric">Metric (g, ml, kg)</string>
+    <string name="units_imperial">Imperial (oz, lb, cups)</string>
+    <string name="ok">OK</string>
+    <string name="settings_footer">Good food. Less waste. 💚</string>
+    <string name="about_title">About Smart Pantry Manager</string>
+    <string name="about_body">Version %1$s
+
+Smart Pantry Manager helps you reduce food waste. Track the ingredients you already have at home, and the app suggests only the recipes you can cook right now - no shopping trip needed.
+
+All data is stored privately on this device.</string>
+    <string name="help_title">How it works</string>
+    <string name="help_body">1. Add what is in your pantry with the + button on the Pantry tab.
+
+2. Open Recipes. A recipe is only suggested when you have every ingredient it needs, in at least the amount it needs.
+
+3. Recipes that are one ingredient short appear separately under Almost There.
+
+4. Tap I Cooked This on a recipe to take its ingredients out of your pantry.
+
+5. The Expiring tab lists food to use in the next 3 days.</string>
 
     <!-- Nav -->
     <string name="nav_pantry">Pantry</string>

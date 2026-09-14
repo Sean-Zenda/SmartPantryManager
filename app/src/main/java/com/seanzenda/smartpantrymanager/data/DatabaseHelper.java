@@ -202,6 +202,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * Items that have an expiry date on or before {@code cutoff} (this includes anything already
+     * expired), soonest first. Items with no expiry date are stored as 0 and excluded.
+     */
+    public List<PantryItem> getExpiringItems(long cutoff) {
+        List<PantryItem> items = new ArrayList<>();
+        try (Cursor c = getReadableDatabase().query(T_PANTRY, null,
+                P_EXPIRY + " != 0 AND " + P_EXPIRY + " <= ?",
+                new String[]{String.valueOf(cutoff)}, null, null, P_EXPIRY + " ASC")) {
+            while (c.moveToNext()) {
+                items.add(readPantryItem(c));
+            }
+        }
+        return items;
+    }
+
+    /** Count for the badge on the Expiring tab - COUNT(*) so no rows are loaded just to be counted. */
+    public int getExpiringCount(long cutoff) {
+        try (Cursor c = getReadableDatabase().rawQuery(
+                "SELECT COUNT(*) FROM " + T_PANTRY + " WHERE " + P_EXPIRY + " != 0 AND "
+                        + P_EXPIRY + " <= ?", new String[]{String.valueOf(cutoff)})) {
+            return c.moveToFirst() ? c.getInt(0) : 0;
+        }
+    }
+
     // =============================================================================================
     // PANTRY - UPDATE / DELETE
     // =============================================================================================
