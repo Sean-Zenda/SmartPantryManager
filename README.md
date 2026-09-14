@@ -119,7 +119,7 @@ app/src/test/java/…                 RecipeMatcherTest, FormValidatorTest
 
 1. Clone the repository:
    ```
-   git clone <your-repo-url>
+   git clone https://github.com/Sean-Zenda/SmartPantryManager.git
    ```
 2. Open the project folder in **Android Studio**.
 3. Let Gradle sync. The project needs **JDK 21** and **Android SDK Platform 37**
