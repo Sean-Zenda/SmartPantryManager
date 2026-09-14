@@ -83,6 +83,39 @@
     <string name="go_to_pantry">Go to Pantry</string>
     <string name="almost_there">Almost There — missing 1 ingredient</string>
     <string name="ingredients">Ingredients</string>
+    <string name="almost_there_sub">Not in your suggestions - you are one ingredient short.</string>
+    <string name="missing_one">Missing: %1$s</string>
+    <string name="recipe_minutes">%d mins</string>
+    <string name="recipe_meta">%1$s · %2$s</string>
+    <string name="recipe_not_found">That recipe could not be found.</string>
+    <string name="in_pantry">In your pantry</string>
+    <string name="not_in_pantry">Not in your pantry</string>
+    <string name="detail_ready">You have everything you need. Ready to cook!</string>
+    <string name="btn_cooked">I Cooked This</string>
+    <string name="cook_confirm_title">Cooked %1$s?</string>
+    <string name="cook_confirm_body">The ingredients this recipe used will be taken out of your pantry. Anything used up completely is removed.</string>
+    <string name="cook_confirm_yes">Update pantry</string>
+    <string name="cook_done">Enjoy your meal! Your pantry has been updated.</string>
+    <plurals name="recipes_can_make">
+        <item quantity="one">You have %d recipe you can make!</item>
+        <item quantity="other">You have %d recipes you can make!</item>
+    </plurals>
+    <plurals name="uses_expiring">
+        <item quantity="one">Uses %d item expiring soon</item>
+        <item quantity="other">Uses %d items expiring soon</item>
+    </plurals>
+    <plurals name="servings">
+        <item quantity="one">%d serving</item>
+        <item quantity="other">%d servings</item>
+    </plurals>
+    <plurals name="detail_missing">
+        <item quantity="one">You are missing %d ingredient, so this is not in your suggestions yet.</item>
+        <item quantity="other">You are missing %d ingredients, so this is not in your suggestions yet.</item>
+    </plurals>
+    <plurals name="btn_missing">
+        <item quantity="one">Missing %d ingredient</item>
+        <item quantity="other">Missing %d ingredients</item>
+    </plurals>
     <string name="method">Method</string>
 
     <!-- Expiring -->

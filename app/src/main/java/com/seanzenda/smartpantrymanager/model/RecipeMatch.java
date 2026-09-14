@@ -11,6 +11,7 @@ public class RecipeMatch {
 
     private final Recipe recipe;
     private final List<RecipeIngredient> missing = new ArrayList<>();
+    private int expiringCount;
 
     public RecipeMatch(Recipe recipe) {
         this.recipe = recipe;
@@ -30,6 +31,14 @@ public class RecipeMatch {
 
     /** Missing exactly one ingredient - shown in the clearly separated "Almost There" section. */
     public boolean isAlmostThere() { return missing.size() == 1; }
+
+    /**
+     * How many of this recipe's ingredients are about to expire in the pantry. Suggestions are
+     * sorted by this so that recipes rescuing food before it goes off are listed first.
+     */
+    public int getExpiringCount() { return expiringCount; }
+
+    public void setExpiringCount(int expiringCount) { this.expiringCount = expiringCount; }
 
     /** The name of the one missing ingredient, for the "Almost There" subtitle. */
     public String getFirstMissingName() {

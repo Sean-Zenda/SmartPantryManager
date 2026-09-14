@@ -10,12 +10,16 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.seanzenda.smartpantrymanager.logic.IngredientMatcher;
+import com.seanzenda.smartpantrymanager.logic.UnitConverter;
 import com.seanzenda.smartpantrymanager.model.PantryItem;
 import com.seanzenda.smartpantrymanager.model.Recipe;
 import com.seanzenda.smartpantrymanager.model.RecipeIngredient;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The single on-device SQLite database for the app.
@@ -218,19 +222,99 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // RECIPES - READ
     // =============================================================================================
 
-    /** Loads every seeded recipe together with its required ingredients. */
+    /**
+     * Loads every recipe together with its required ingredients in a single JOIN query.
+     *
+     * <p>The JOIN returns one row per (recipe, ingredient) pair, so a recipe with five ingredients
+     * appears on five rows. A LinkedHashMap keyed by recipe id folds those rows back into one
+     * {@link Recipe} each, while keeping the alphabetical order from ORDER BY. One query replaces the
+     * 21 separate queries (1 for recipes + 1 per recipe) a naive loop would run.</p>
+     */
     public List<Recipe> getAllRecipes() {
-        List<Recipe> recipes = new ArrayList<>();
-        try (Cursor c = getReadableDatabase().query(T_RECIPES, null, null, null,
-                null, null, R_NAME + " ASC")) {
+        String sql = "SELECT r." + R_ID + " AS rid, r." + R_NAME + " AS rname, r." + R_SERVINGS
+                + ", r." + R_MINUTES + ", r." + R_EMOJI + ", r." + R_METHOD
+                + ", i." + RI_ID + " AS iid, i." + RI_NAME + " AS iname, i." + RI_QTY
+                + ", i." + RI_UNIT
+                + " FROM " + T_RECIPES + " r"
+                + " LEFT JOIN " + T_RECIPE_ING + " i ON i." + RI_RECIPE_ID + " = r." + R_ID
+                + " ORDER BY r." + R_NAME + " COLLATE NOCASE ASC, i." + RI_ID + " ASC";
+
+        Map<Long, Recipe> byId = new LinkedHashMap<>();
+        try (Cursor c = getReadableDatabase().rawQuery(sql, null)) {
             while (c.moveToNext()) {
-                recipes.add(readRecipe(c));
+                long recipeId = c.getLong(c.getColumnIndexOrThrow("rid"));
+                Recipe recipe = byId.get(recipeId);
+                if (recipe == null) {
+                    recipe = new Recipe(recipeId,
+                            c.getString(c.getColumnIndexOrThrow("rname")),
+                            c.getInt(c.getColumnIndexOrThrow(R_SERVINGS)),
+                            c.getInt(c.getColumnIndexOrThrow(R_MINUTES)),
+                            c.getString(c.getColumnIndexOrThrow(R_EMOJI)),
+                            c.getString(c.getColumnIndexOrThrow(R_METHOD)));
+                    byId.put(recipeId, recipe);
+                }
+                // LEFT JOIN: a recipe with no ingredient rows gives NULL ingredient columns.
+                int ingredientIdCol = c.getColumnIndexOrThrow("iid");
+                if (!c.isNull(ingredientIdCol)) {
+                    recipe.addIngredient(new RecipeIngredient(
+                            c.getLong(ingredientIdCol),
+                            recipeId,
+                            c.getString(c.getColumnIndexOrThrow("iname")),
+                            c.getDouble(c.getColumnIndexOrThrow(RI_QTY)),
+                            c.getString(c.getColumnIndexOrThrow(RI_UNIT))));
+                }
             }
         }
-        for (Recipe recipe : recipes) {
-            loadIngredientsInto(recipe);
+        return new ArrayList<>(byId.values());
+    }
+
+    /**
+     * "I cooked this": takes the recipe's ingredients out of the pantry inside one transaction.
+     *
+     * <p>Items with the soonest expiry date are used up first, so older food is not left to go off.
+     * An item that is completely used up is deleted; otherwise its quantity is reduced, expressed in
+     * the unit the user saved it in. Where the pantry measures an ingredient differently from the
+     * recipe (grams versus pieces) the amount used cannot be known, so that item is left unchanged.</p>
+     */
+    public void cookRecipe(@NonNull Recipe recipe) {
+        List<PantryItem> pantry = getAllPantryItems();
+        pantry.sort((a, b) -> Long.compare(
+                a.hasExpiry() ? a.getExpiryDate() : Long.MAX_VALUE,
+                b.hasExpiry() ? b.getExpiryDate() : Long.MAX_VALUE));
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            for (RecipeIngredient needed : recipe.getIngredients()) {
+                String key = IngredientMatcher.canonical(needed.getName());
+                UnitConverter.Dimension dimension = UnitConverter.dimensionOf(needed.getUnit());
+                double remaining = UnitConverter.toBase(needed.getQuantity(), needed.getUnit());
+
+                for (PantryItem item : pantry) {
+                    if (remaining <= 0) break;
+                    if (item.getQuantity() <= 0) continue;                       // already used up
+                    if (!key.equals(IngredientMatcher.canonical(item.getName()))) continue;
+                    if (UnitConverter.dimensionOf(item.getUnit()) != dimension) continue;
+
+                    double perUnit = UnitConverter.toBase(1, item.getUnit());
+                    double held = item.getQuantity() * perUnit;
+                    double used = Math.min(held, remaining);
+                    remaining -= used;
+
+                    double left = (held - used) / perUnit;
+                    if (left < 0.001) {
+                        item.setQuantity(0);
+                        deletePantryItem(item.getId());
+                    } else {
+                        item.setQuantity(Math.round(left * 100.0) / 100.0);
+                        updatePantryItem(item);
+                    }
+                }
+            }
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
         }
-        return recipes;
     }
 
     /** Loads one recipe (with ingredients) for the detail screen, or null if the id is unknown. */

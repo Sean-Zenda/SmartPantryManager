@@ -20,6 +20,9 @@
     <color name="status_warn">#E9A21B</color>
     <color name="status_danger">#D64545</color>
 
+    <color name="warn_pale">#FFF4DD</color>
+    <color name="warn_text">#8A5A00</color>
+
     <color name="disabled_grey">#C9CDC9</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
